@@ -1,4 +1,4 @@
-# TSTableViewTemplate
+# SwiftTableViewTemplate
 ## 适用场景
 
 每个`section`都是`唯一`的`cell`注册的，每个`section`只有一行`row`。通俗地讲，适用于由不同内容的模块组合起来的界面。
@@ -11,7 +11,7 @@
 
 ## 使用
 
-#### 1. 初始化`TSBaseCellData`，每个`TSBaseCellData`绑定了我们将要注册的`cell`和显示的`data`
+#### 1. 初始化`TSBaseCellData`，每个`TSBaseCellData`绑定了我们将要注册的`cell`和显示的`data
 
 ```swift
 var dataSource = [TSBaseCellData]()
@@ -31,7 +31,7 @@ dataSource.append(couponCD)
 
 // 等待其他接口返回数据，局部刷新该cell
 async {
-  	couponCD.data = model
+    couponCD.data = model
     reloadCellSubject.onNext(couponCD)
 }
 ```
@@ -72,11 +72,11 @@ class AHSHomeBusinessCell: TSBaseCell {
             return
         }
         guard let model = data as? AHSHomeConfig, 
-      				let items = model.businessItemsConfig, items.count > 0 else {
+              let items = model.businessItemsConfig, items.count > 0 else {
             return
         }
         cellData.cellForRowMark = true
-     		// 接下来，视图赋值操作......
+        /// 接下来，视图赋值操作......
     }
 }
 ```
@@ -104,7 +104,7 @@ class AHSHomeBusinessCell: TSBaseCell {
 
 别问我，为什么不用UITableViewAutomaticDimension，性能先不说，这玩意受限性很大，比如：
 
-1. 若设置了estimatedRowHeight = 0; Cell自适应高度 UITableViewAutomaticDimension就失效了
+1. 若设置了estimatedRowHeight = 0; cell自适应高度 UITableViewAutomaticDimension就失效了
 2. 设置了self.contentView的UIEdgeInsets会影响UITableView.automaticDimension自动布局
 
 所以，还是自己动手丰衣足食。
